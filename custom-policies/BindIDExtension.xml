@@ -209,7 +209,7 @@
             <DisplayName>Azure Active Directory</DisplayName>
             <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.AzureActiveDirectoryProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
             <CryptographicKeys>
-              <Key Id="issuer_secret" StorageReferenceId="azure-ad-b2c-token-signing-key" />
+              <Key Id="issuer_secret" StorageReferenceId="B2C_1A_TokenSigningKeyContainer" />
             </CryptographicKeys>
             <IncludeInSso>false</IncludeInSso>
             <UseTechnicalProfileForSessionManagement ReferenceId="SM-Noop" />
