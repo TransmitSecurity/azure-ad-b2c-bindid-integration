@@ -262,7 +262,7 @@
       <!-- BindID authentication endpoint -->
       <TechnicalProfiles>
         <TechnicalProfile Id="BindID-SignIn">
-          <DisplayName>Login with BindID</DisplayName>
+          <DisplayName>BindID</DisplayName>
           <Protocol Name="OpenIdConnect" />
           <Metadata>
             <Item Key="HttpBinding">POST</Item>
