@@ -25,7 +25,7 @@
         </OrchestrationStep>
         <OrchestrationStep Order="2" Type="ClaimsExchange">
           <ClaimsExchanges>
-            <ClaimsExchange Id="BindIDExchange" TechnicalProfileReferenceId="BindID-OAuth" />
+            <ClaimsExchange Id="BindIDExchange" TechnicalProfileReferenceId="BindID-SignIn" />
             <ClaimsExchange Id="LocalAccountSigninEmailExchange" TechnicalProfileReferenceId="SelfAsserted-LocalAccountSignin-Email" />
           </ClaimsExchanges>
         </OrchestrationStep>
