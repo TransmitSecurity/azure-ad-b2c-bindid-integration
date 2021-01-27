@@ -256,7 +256,7 @@
     </ClaimsProvider>
     
     <ClaimsProvider>
-      <Domain>https://signin.bindid-sandbox.io</Domain>
+      <Domain>signin.bindid-sandbox.io</Domain>
       <DisplayName>BindID</DisplayName>
 
       <!-- BindID authentication endpoint -->
