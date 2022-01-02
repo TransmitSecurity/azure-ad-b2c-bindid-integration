@@ -8,252 +8,21 @@
   PolicyId="B2C_1A_BindIDExtension"
   PublicPolicyUri="http://yourtenant.onmicrosoft.com/B2C_1A_BindIDExtension">
 
+  <BasePolicy>
+    <TenantId>yourtenant.onmicrosoft.com</TenantId>
+    <PolicyId>B2C_1A_TrustFrameworkExtensions</PolicyId>
+  </BasePolicy>
+
   <BuildingBlocks>
-    
     <ClaimsSchema>
-      
       <!-- Access token returned by BindID -->
       <ClaimType Id="access_token">
         <DataType>string</DataType>
-      </ClaimType>
-
-      <!-- copied from azure-starter-pack/SocialAndLocalAccounts/TrustFrameworkBase -->
-      <ClaimType Id="objectId">
-        <DisplayName>User's Object ID</DisplayName>
-        <DataType>string</DataType>
-        <DefaultPartnerClaimTypes>
-          <Protocol Name="OAuth2" PartnerClaimType="oid" />
-          <Protocol Name="OpenIdConnect" PartnerClaimType="oid" />
-          <Protocol Name="SAML2" PartnerClaimType="http://schemas.microsoft.com/identity/claims/objectidentifier" />
-        </DefaultPartnerClaimTypes>
-        <UserHelpText>Object identifier (ID) of the user object in Azure AD.</UserHelpText>
-      </ClaimType>
-
-      <!-- copied from azure-starter-pack/SocialAndLocalAccounts/TrustFrameworkBase -->
-      <ClaimType Id="alternativeSecurityId">
-        <DisplayName>AlternativeSecurityId</DisplayName>
-        <DataType>string</DataType>
-        <UserHelpText/>
-      </ClaimType>
-
-      <!-- copied from azure-starter-pack/SocialAndLocalAccounts/TrustFrameworkBase -->
-      <ClaimType Id="issuerUserId">
-        <DisplayName>Username</DisplayName>
-        <DataType>string</DataType>
-        <UserHelpText/>
-        <UserInputType>TextBox</UserInputType>
-        <Restriction>
-          <Pattern RegularExpression="^[a-zA-Z0-9]+[a-zA-Z0-9_-]*$" HelpText="The username you provided is not valid. It must begin with an alphabet or number and can contain alphabets, numbers and the following symbols: _ -" />
-        </Restriction>
-      </ClaimType>
-
-      <!-- copied from azure-starter-pack/SocialAndLocalAccounts/TrustFrameworkBase -->
-      <ClaimType Id="email">
-        <DisplayName>Email Address</DisplayName>
-        <DataType>string</DataType>
-        <DefaultPartnerClaimTypes>
-          <Protocol Name="OpenIdConnect" PartnerClaimType="email" />
-        </DefaultPartnerClaimTypes>
-        <UserHelpText>Email address that can be used to contact you.</UserHelpText>
-        <UserInputType>TextBox</UserInputType>
-        <Restriction>
-          <Pattern RegularExpression="^[a-zA-Z0-9.!#$%&amp;'^_`{}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$" HelpText="Please enter a valid email address." />
-        </Restriction>
-      </ClaimType>
-
-      <!-- copied from azure-starter-pack/SocialAndLocalAccounts/TrustFrameworkBase -->
-      <ClaimType Id="identityProvider">
-        <DisplayName>Identity Provider</DisplayName>
-        <DataType>string</DataType>
-        <DefaultPartnerClaimTypes>
-          <Protocol Name="OAuth2" PartnerClaimType="idp" />
-          <Protocol Name="OpenIdConnect" PartnerClaimType="idp" />
-          <Protocol Name="SAML2" PartnerClaimType="http://schemas.microsoft.com/identity/claims/identityprovider" />
-        </DefaultPartnerClaimTypes>
-        <UserHelpText/>
-      </ClaimType>
-
-      <!-- copied from azure-starter-pack/SocialAndLocalAccounts/TrustFrameworkBase -->
-      <ClaimType Id="authenticationSource">
-        <DisplayName>AuthenticationSource</DisplayName>
-        <DataType>string</DataType>
-        <UserHelpText>Specifies whether the user was authenticated at Social IDP or local account.</UserHelpText>
-      </ClaimType>
-
-      <!-- copied from azure-starter-pack/SocialAndLocalAccounts/TrustFrameworkBase -->
-      <ClaimType Id="userPrincipalName">
-        <DisplayName>UserPrincipalName</DisplayName>
-        <DataType>string</DataType>
-        <DefaultPartnerClaimTypes>
-          <Protocol Name="OAuth2" PartnerClaimType="upn" />
-          <Protocol Name="OpenIdConnect" PartnerClaimType="upn" />
-          <Protocol Name="SAML2" PartnerClaimType="http://schemas.microsoft.com/identity/claims/userprincipalname" />
-        </DefaultPartnerClaimTypes>
-        <UserHelpText>Your user name as stored in the Azure Active Directory.</UserHelpText>
-      </ClaimType>
-
-      <!-- copied from azure-starter-pack/SocialAndLocalAccounts/TrustFrameworkBase -->
-      <ClaimType Id="otherMails">
-        <DisplayName>Alternate Email Addresses</DisplayName>
-        <DataType>stringCollection</DataType>
-        <UserHelpText>Email addresses that can be used to contact the user.</UserHelpText>
-      </ClaimType>
-
-      <!-- copied from azure-starter-pack/SocialAndLocalAccounts/TrustFrameworkBase -->
-      <ClaimType Id="displayName">
-        <DisplayName>Display Name</DisplayName>
-        <DataType>string</DataType>
-        <DefaultPartnerClaimTypes>
-          <Protocol Name="OAuth2" PartnerClaimType="unique_name" />
-          <Protocol Name="OpenIdConnect" PartnerClaimType="name" />
-          <Protocol Name="SAML2" PartnerClaimType="http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name" />
-        </DefaultPartnerClaimTypes>
-        <UserHelpText>Your display name.</UserHelpText>
-        <UserInputType>TextBox</UserInputType>
-      </ClaimType>
-
-      <!-- copied from azure-starter-pack/SocialAndLocalAccounts/TrustFrameworkBase -->
-      <ClaimType Id="givenName">
-        <DisplayName>Given Name</DisplayName>
-        <DataType>string</DataType>
-        <DefaultPartnerClaimTypes>
-          <Protocol Name="OAuth2" PartnerClaimType="given_name" />
-          <Protocol Name="OpenIdConnect" PartnerClaimType="given_name" />
-          <Protocol Name="SAML2" PartnerClaimType="http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname" />
-        </DefaultPartnerClaimTypes>
-        <UserHelpText>Your given name (also known as first name).</UserHelpText>
-        <UserInputType>TextBox</UserInputType>
-      </ClaimType>
-
-      <!-- copied from azure-starter-pack/SocialAndLocalAccounts/TrustFrameworkBase -->
-      <ClaimType Id="surname">
-        <DisplayName>Surname</DisplayName>
-        <DataType>string</DataType>
-        <DefaultPartnerClaimTypes>
-          <Protocol Name="OAuth2" PartnerClaimType="family_name" />
-          <Protocol Name="OpenIdConnect" PartnerClaimType="family_name" />
-          <Protocol Name="SAML2" PartnerClaimType="http://schemas.xmlsoap.org/ws/2005/05/identity/claims/surname" />
-        </DefaultPartnerClaimTypes>
-        <UserHelpText>Your surname (also known as family name or last name).</UserHelpText>
-        <UserInputType>TextBox</UserInputType>
-      </ClaimType>
-
-      <!-- copied from azure-starter-pack/SocialAndLocalAccounts/TrustFrameworkBase -->
-      <ClaimType Id="upnUserName">
-        <DisplayName>UPN User Name</DisplayName>
-        <DataType>string</DataType>
-        <UserHelpText>The user name for creating user principal name.</UserHelpText>
-      </ClaimType>
-
+      </ClaimType>  
     </ClaimsSchema>
-
-    <ClaimsTransformations>
-
-      <!-- copied from azure-starter-pack/SocialAndLocalAccounts/TrustFrameworkBase -->
-      <ClaimsTransformation Id="CreateAlternativeSecurityId" TransformationMethod="CreateAlternativeSecurityId">
-        <InputClaims>
-          <InputClaim ClaimTypeReferenceId="issuerUserId" TransformationClaimType="key" />
-          <InputClaim ClaimTypeReferenceId="identityProvider" TransformationClaimType="identityProvider" />
-        </InputClaims>
-        <OutputClaims>
-          <OutputClaim ClaimTypeReferenceId="alternativeSecurityId" TransformationClaimType="alternativeSecurityId" />
-        </OutputClaims>
-      </ClaimsTransformation>
-
-      <ClaimsTransformation Id="CreateUserPrincipalName" TransformationMethod="FormatStringClaim">
-        <InputClaims>
-          <InputClaim ClaimTypeReferenceId="upnUserName" TransformationClaimType="inputClaim" />
-        </InputClaims>
-        <InputParameters>
-          <InputParameter Id="stringFormat" DataType="string" Value="cpim_{0}@{RelyingPartyTenantId}" />
-        </InputParameters>
-        <OutputClaims>
-          <OutputClaim ClaimTypeReferenceId="userPrincipalName" TransformationClaimType="outputClaim" />
-        </OutputClaims>
-      </ClaimsTransformation>
-
-      <ClaimsTransformation Id="CreateRandomUPNUserName" TransformationMethod="CreateRandomString">
-        <InputParameters>
-          <InputParameter Id="randomGeneratorType" DataType="string" Value="GUID" />
-        </InputParameters>
-        <OutputClaims>
-          <OutputClaim ClaimTypeReferenceId="upnUserName" TransformationClaimType="outputClaim" />
-        </OutputClaims>
-      </ClaimsTransformation>
-
-    </ClaimsTransformations>
-
   </BuildingBlocks>
 
   <ClaimsProviders>
-
-    <!-- copied from azure-starter-pack/SocialAndLocalAccounts/TrustFrameworkBase -->
-    <ClaimsProvider>
-      <DisplayName>Trustframework Policy Engine TechnicalProfiles</DisplayName>
-      <TechnicalProfiles>
-        <TechnicalProfile Id="TpEngine_c3bd4fe2-1775-4013-b91d-35f16d377d13">
-          <DisplayName>Trustframework Policy Engine Default Technical Profile</DisplayName>
-          <Protocol Name="None" />
-          <Metadata>
-            <Item Key="url">{service:te}</Item>
-          </Metadata>
-        </TechnicalProfile>
-      </TechnicalProfiles>
-    </ClaimsProvider>
-    
-    <!-- copied from azure-starter-pack/SocialAndLocalAccounts/TrustFrameworkBase -->
-    <ClaimsProvider>
-      <DisplayName>Azure Active Directory</DisplayName>
-        <TechnicalProfiles>
-          <TechnicalProfile Id="AAD-Common">
-            <DisplayName>Azure Active Directory</DisplayName>
-            <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.AzureActiveDirectoryProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
-            <CryptographicKeys>
-              <Key Id="issuer_secret" StorageReferenceId="B2C_1A_TokenSigningKeyContainer" />
-            </CryptographicKeys>
-            <IncludeInSso>false</IncludeInSso>
-            <UseTechnicalProfileForSessionManagement ReferenceId="SM-Noop" />
-          </TechnicalProfile>
-          <TechnicalProfile Id="AAD-UserReadUsingAlternativeSecurityId">
-          <Metadata>
-            <Item Key="Operation">Read</Item>
-            <Item Key="RaiseErrorIfClaimsPrincipalDoesNotExist">true</Item>
-            <Item Key="UserMessageIfClaimsPrincipalDoesNotExist">User does not exist. Please sign up before you can sign in.</Item>
-          </Metadata>
-          <InputClaims>
-            <InputClaim ClaimTypeReferenceId="AlternativeSecurityId" PartnerClaimType="alternativeSecurityId" Required="true" />
-          </InputClaims>
-          <OutputClaims>
-            <!-- Required claims -->
-            <OutputClaim ClaimTypeReferenceId="objectId" />
-            <!-- Optional claims -->
-            <OutputClaim ClaimTypeReferenceId="userPrincipalName" />
-            <OutputClaim ClaimTypeReferenceId="displayName" />
-            <OutputClaim ClaimTypeReferenceId="otherMails" />
-            <OutputClaim ClaimTypeReferenceId="givenName" />
-            <OutputClaim ClaimTypeReferenceId="surname" />
-          </OutputClaims>
-          <IncludeTechnicalProfile ReferenceId="AAD-Common" />
-        </TechnicalProfile>
-        <TechnicalProfile Id="AAD-UserReadUsingAlternativeSecurityId-NoError">
-            <Metadata>
-              <Item Key="RaiseErrorIfClaimsPrincipalDoesNotExist">false</Item>
-            </Metadata>
-            <IncludeTechnicalProfile ReferenceId="AAD-UserReadUsingAlternativeSecurityId" />
-          </TechnicalProfile>
-      </TechnicalProfiles>
-    </ClaimsProvider>
-
-    <!-- copied from azure-starter-pack/SocialAndLocalAccounts/TrustFrameworkBase -->
-    <ClaimsProvider>
-      <DisplayName>Session Management</DisplayName>
-      <TechnicalProfiles>
-        <TechnicalProfile Id="SM-Noop">
-          <DisplayName>Noop Session Management Provider</DisplayName>
-          <Protocol Name="Proprietary" Handler="Web.TPEngine.SSO.NoopSSOSessionProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
-        </TechnicalProfile>
-      </TechnicalProfiles>
-    </ClaimsProvider>
     
     <ClaimsProvider>
       <Domain>signin.bindid-sandbox.io</Domain>
@@ -311,6 +80,164 @@
     </ClaimsProvider>
 
   </ClaimsProviders>
+
+
+  <UserJourneys>
+
+    <UserJourney Id="SignUpOrSignInWithBindID">
+      <OrchestrationSteps>
+
+        <!-- Show an authentication selector with sign-in with Azure AD, sign-up with Azure AD and sign-in with BindID 
+             if user select Azure AD sign-in - action will be executed in this step
+             if user select Azure AD sign-up or BindID sign-in - action will be executed in the next step -->
+        <OrchestrationStep Order="1" Type="CombinedSignInAndSignUp" ContentDefinitionReferenceId="api.signuporsignin">
+          <ClaimsProviderSelections>
+            <ClaimsProviderSelection TargetClaimsExchangeId="BindIDExchange" />
+            <ClaimsProviderSelection ValidationClaimsExchangeId="LocalAccountSigninEmailExchange" />
+          </ClaimsProviderSelections>
+          <ClaimsExchanges>
+            <ClaimsExchange Id="LocalAccountSigninEmailExchange" TechnicalProfileReferenceId="SelfAsserted-LocalAccountSignin-Email" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+
+        <!-- Execute BindID sign-in or Azure AD sign-up depending on the pervious selection 
+             Skip if objectId already exist (user signed-in in previous step) -->
+        <OrchestrationStep Order="2" Type="ClaimsExchange">
+          <Preconditions>
+            <Precondition Type="ClaimsExist" ExecuteActionsIf="true">
+              <Value>objectId</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+          </Preconditions>
+          <ClaimsExchanges>
+            <ClaimsExchange Id="BindIDExchange" TechnicalProfileReferenceId="BindID-SignIn" />
+            <ClaimsExchange Id="SignUpWithLogonEmailExchange" TechnicalProfileReferenceId="LocalAccountSignUpWithLogonEmail" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+
+        <!-- For social IDP authentication, attempt to find the user account in the directory. -->
+        <OrchestrationStep Order="3" Type="ClaimsExchange">
+          <Preconditions>
+            <Precondition Type="ClaimEquals" ExecuteActionsIf="true">
+              <Value>authenticationSource</Value>
+              <Value>localAccountAuthentication</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+          </Preconditions>
+          <ClaimsExchanges>
+            <ClaimsExchange Id="AADUserReadUsingAlternativeSecurityId" TechnicalProfileReferenceId="AAD-UserReadUsingAlternativeSecurityId-NoError" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+        
+        <!-- If the user has authenticated using BindID and the BindID user is not binded to Azure AD user, 
+             show an authentication selector the AD sign-in and sign-up.
+             if user select Azure AD sign-in - action will be executed in this step
+             if user select Azure AD sign-up - action will be executed in the next step -->
+        <OrchestrationStep Order="4" Type="CombinedSignInAndSignUp" ContentDefinitionReferenceId="api.signuporsignin">
+          <Preconditions>
+            <Precondition Type="ClaimsExist" ExecuteActionsIf="true">
+              <Value>objectId</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+          </Preconditions>
+          <ClaimsProviderSelections>
+            <ClaimsProviderSelection ValidationClaimsExchangeId="LocalAccountSigninEmailExchangeAfterSocial" />
+          </ClaimsProviderSelections>
+          <ClaimsExchanges>
+            <ClaimsExchange Id="LocalAccountSigninEmailExchangeAfterSocial" TechnicalProfileReferenceId="SelfAsserted-LocalAccountSignin-Email" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+        
+        <!-- Execute Azure AD sign-up depending on the pervious selection 
+             If objectId exists then user has select sign-in in the previous step -->
+        <OrchestrationStep Order="5" Type="ClaimsExchange">
+          <Preconditions>
+            <Precondition Type="ClaimsExist" ExecuteActionsIf="true">
+              <Value>objectId</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+          </Preconditions>
+          <ClaimsExchanges>
+            <ClaimsExchange Id="SignUpWithLogonEmailExchangeAfterSocial" TechnicalProfileReferenceId="LocalAccountSignUpWithLogonEmail" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+        
+        <!-- Update user with the BindID alternative security id. -->
+        <OrchestrationStep Order="6" Type="ClaimsExchange">
+          <Preconditions>
+            <Precondition Type="ClaimEquals" ExecuteActionsIf="false">
+              <Value>newUser</Value>
+              <Value>true</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+            <Precondition Type="ClaimsExist" ExecuteActionsIf="false">
+              <Value>alternativeSecurityId</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+          </Preconditions>
+          <ClaimsExchanges>
+            <ClaimsExchange Id="AttachBindIDAlternativeSecurityId" TechnicalProfileReferenceId="AttachBindIDAlternativeSecurityId" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+
+        <!-- This step reads any user attributes that we may not have received when authenticating using ESTS so they can be sent 
+          in the token. -->
+        <OrchestrationStep Order="7" Type="ClaimsExchange">
+          <ClaimsExchanges>
+            <ClaimsExchange Id="AADUserReadWithObjectId" TechnicalProfileReferenceId="AAD-UserReadUsingObjectId" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+
+        <!-- generate JWT -->
+        <OrchestrationStep Order="8" Type="SendClaims" CpimIssuerTechnicalProfileReferenceId="JwtIssuer" />
+
+      </OrchestrationSteps>
+      <ClientDefinition ReferenceId="DefaultWeb" />
+    </UserJourney>
+
+
+    <UserJourney Id="ProfileEditWithBindID">
+      <OrchestrationSteps>
+        <OrchestrationStep Order="1" Type="ClaimsProviderSelection" ContentDefinitionReferenceId="api.idpselections">
+          <ClaimsProviderSelections>
+            <ClaimsProviderSelection TargetClaimsExchangeId="BindIDExchange" />
+            <ClaimsProviderSelection TargetClaimsExchangeId="LocalAccountSigninEmailExchange" />
+          </ClaimsProviderSelections>
+        </OrchestrationStep>
+        <OrchestrationStep Order="2" Type="ClaimsExchange">
+          <ClaimsExchanges>
+            <ClaimsExchange Id="BindIDExchange" TechnicalProfileReferenceId="BindID-SignIn" />
+            <ClaimsExchange Id="LocalAccountSigninEmailExchange" TechnicalProfileReferenceId="SelfAsserted-LocalAccountSignin-Email" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+        <OrchestrationStep Order="3" Type="ClaimsExchange">
+          <Preconditions>
+            <Precondition Type="ClaimEquals" ExecuteActionsIf="true">
+              <Value>authenticationSource</Value>
+              <Value>localAccountAuthentication</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+          </Preconditions>
+          <ClaimsExchanges>
+            <ClaimsExchange Id="AADUserRead" TechnicalProfileReferenceId="AAD-UserReadUsingAlternativeSecurityId" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+        <OrchestrationStep Order="4" Type="ClaimsExchange">
+          <ClaimsExchanges>
+            <ClaimsExchange Id="AADUserReadWithObjectId" TechnicalProfileReferenceId="AAD-UserReadUsingObjectId" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+        <OrchestrationStep Order="5" Type="ClaimsExchange">
+          <ClaimsExchanges>
+            <ClaimsExchange Id="B2CUserProfileUpdateExchange" TechnicalProfileReferenceId="SelfAsserted-ProfileUpdate" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+        <OrchestrationStep Order="6" Type="SendClaims" CpimIssuerTechnicalProfileReferenceId="JwtIssuer" />
+      </OrchestrationSteps>
+      <ClientDefinition ReferenceId="DefaultWeb" />
+    </UserJourney>
+
+  </UserJourneys>
 
 </TrustFrameworkPolicy>
 
