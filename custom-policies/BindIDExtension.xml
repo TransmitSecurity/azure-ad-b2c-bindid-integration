@@ -40,6 +40,7 @@
             <Item Key="METADATA">https://signin.bindid-sandbox.io/.well-known/openid-configuration</Item>
             <Item Key="AccessTokenResponseFormat">json</Item>
             <Item Key="response_types">code</Item>
+            <Item Key="response_mode">query</Item>
             <Item Key="client_id">bindid-client-id</Item>
           </Metadata>
           <CryptographicKeys>
