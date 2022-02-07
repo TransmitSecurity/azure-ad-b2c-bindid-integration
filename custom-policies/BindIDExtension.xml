@@ -40,7 +40,7 @@
             <Item Key="METADATA">https://signin.bindid-sandbox.io/.well-known/openid-configuration</Item>
             <Item Key="AccessTokenResponseFormat">json</Item>
             <Item Key="response_types">code</Item>
-            <Item Key="response_mode">query</Item>
+            <Item Key="response_mode">form_post</Item>
             <Item Key="client_id">bindid-client-id</Item>
           </Metadata>
           <CryptographicKeys>
@@ -58,6 +58,7 @@
             <OutputClaimsTransformation ReferenceId="CreateUserPrincipalName" />
             <OutputClaimsTransformation ReferenceId="CreateAlternativeSecurityId" />
           </OutputClaimsTransformations>
+          <UseTechnicalProfileForSessionManagement ReferenceId="SM-SocialLogin" />
         </TechnicalProfile>
 
         <!-- Attach BindId alternative security id to existing user -->
